@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  server:
+    build: ./server
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - ALLOWED_ORIGINS=http://localhost:5173
+  turn:
+    build: ./infra/turn
+    restart: unless-stopped
+    ports:
+      - "3478:3478/udp"
+      - "3478:3478/tcp"
